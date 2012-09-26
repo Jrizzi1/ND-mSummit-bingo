@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+
+	<title>ND Mobile Summit 2012 - Bingo Login</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="user-scalable=no, width=device-width">
+<script type="text/javascript">
+/*! Normalized address bar hiding for iOS & Android (c) @scottjehl MIT License */
+(function( win ){
+	var doc = win.document;
+	
+	// If there's a hash, or addEventListener is undefined, stop here
+	if( !location.hash && win.addEventListener ){
+		
+		//scroll to 1
+		window.scrollTo( 0, 1 );
+		var scrollTop = 1,
+			getScrollTop = function(){
+				return win.pageYOffset || doc.compatMode === "CSS1Compat" && doc.documentElement.scrollTop || doc.body.scrollTop || 0;
+			},
+		
+			//reset to 0 on bodyready, if needed
+			bodycheck = setInterval(function(){
+				if( doc.body ){
+					clearInterval( bodycheck );
+					scrollTop = getScrollTop();
+					win.scrollTo( 0, scrollTop === 1 ? 0 : 1 );
+				}	
+			}, 15 );
+		
+		win.addEventListener( "load", function(){
+			setTimeout(function(){
+				//at load, if user hasn't scrolled more than 20 or so...
+				if( getScrollTop() < 20 ){
+					//reset to hide addr bar at onload
+					win.scrollTo( 0, scrollTop === 1 ? 0 : 1 );
+				}
+			}, 0);
+		} );
+	}
+})( this );
+</script>	
+ 
+    
+
+
+</head>
+
+<body>
+
+    
+<div data-role="page" id="foo" data-title="Page Foo">
+<!-- start content -->
+	<div data-role="content" data-inset="true">	
+	
+        <form action="index.html" method="get">
+            <fieldset>
+        
+
+<label for="basic">Netid or Email:</label>
+<input type="text" name="n" id="basic"  data-mini="true" />
+
+                <input id="Submit1" type="submit" value="Play" data-role="button" data-inline="true" data-theme="b" />
+
+            </fieldset>
+        </form>
+        
+	</div>
+	<!-- end content -->
+    </div>
+</body>
+
+</html>
