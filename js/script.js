@@ -9,18 +9,19 @@ window.location.href='login.html';
 localStorage.removeItem("customSeed");
 localStorage.setItem("customSeed", CUSTOM_SEED);
 
+//array of numbers for each of the 5 columns
+var usedNums = new Array(76);
+
 $(document).ready(function() {	
 //debugger: localStorage.clear();
 
 //Display variable settings
-var headerText = "ND mSummit Bingo";
-var footerText = "<a href='https://github.com/Jrizzi1/ND-mSummit-bingo' target='_blank'>Code on github</a>";
-var winText = "Winner";
+var twitterAppUri = "twitter://post?message=@NDMobileSummit%20I%20won%20!%20My%20board%20ID%20was%20"+netid;
 
+	$('body').on('touchmove', true);
+	$('#netid').append(netid);
+	$('#twitApp').attr('href', twitterAppUri);	
 
-	$('body').on('touchmove', false);
-	$('#header').append(headerText);
-	$('#footer').append('Board ID: '+netid+' // '+footerText);
 
 //Generate Bingo Card
 	newCard();
@@ -60,26 +61,30 @@ var winText = "Winner";
 		var diag2 = ($('#sq4').data('value')+$('#sq8').data('value')+$('#sqfree').data('value')+$('#sq15').data('value')+$('#sq19').data('value'));	
 		
 		if (row1 == 5 || row2 == 5 || row3 == 5 || row4 == 5 || row5 == 5 || col1 == 5 || col2 == 5 || col3 == 5  || col4 == 5  || col5 == 5 || diag1 == 5 || diag2 == 5) {
-			$('#header').html(winText);
+			/*$('#header').html(winText);
 			$('#header').addClass("win");
-			
+			$('#header').attr('data-theme','b').removeClass('ui-bar-c').addClass('ui-bar-b');*/
+			$.mobile.changePage($('#winner'), 'pop');	
 	
 //Removed because chas Grundy thought it was annoying...winSnd.play();
     		
     	} else {
-			$('#header').html(headerText);
+/*			$('#header').html(headerText);
 			$('#header').removeClass("win");
+			$('#header').attr('data-theme','c').removeClass('ui-bar-b').addClass('ui-bar-c')*/
 		}; 
     });
         
 });
+			
+	
 
 function newCard() {
 // Cycle through 25 squares	
   for(var i=0 ; i<24 ; i++){
 		if (i==12) {
 //if 13, append the freesquare then move along			
-			$('#board').append("<div data-value='1' class='selected freesquare' id='sqfree'><img height='71px' width='81px' style='margin-top:18%' src='img/med.png' /></div>");
+			$('#board').append("<div data-value='1' class='selected freesquare' id='sqfree'></div>");
 			setSquare(i);
 		} else {
 
@@ -89,8 +94,7 @@ function newCard() {
 }
   
 function setSquare(thisSquare){
-//array of numbers for each of the 5 columns
-var usedNums = new Array(76);		
+
   var currentSquare = "sq" + thisSquare;
   var colPlace = new Array(0,1,2,3,4,0,1,2,3,4,0,1,3,4,0,1,2,3,4,0,1,2,3,4);
   var colBasis = colPlace[thisSquare] * 15;
@@ -162,43 +166,3 @@ function getParameterByName(name)
   else
     return decodeURIComponent(results[1].replace(/\+/g, " "));
 }
-
-shuffle = function(v){
-    	for(var j, x, i = v.length; i; j = parseInt(Math.random() * i), x = v[--i], v[i] = v[j], v[j] = x);
-    	return v;
-};
-
-/*! Normalized address bar hiding for iOS & Android (c) @scottjehl MIT License */
-(function( win ){
-	var doc = win.document;
-	
-	// If there's a hash, or addEventListener is undefined, stop here
-	if( !location.hash && win.addEventListener ){
-		
-		//scroll to 1
-		window.scrollTo( 0, 1 );
-		var scrollTop = 1,
-			getScrollTop = function(){
-				return win.pageYOffset || doc.compatMode === "CSS1Compat" && doc.documentElement.scrollTop || doc.body.scrollTop || 0;
-			},
-		
-			//reset to 0 on bodyready, if needed
-			bodycheck = setInterval(function(){
-				if( doc.body ){
-					clearInterval( bodycheck );
-					scrollTop = getScrollTop();
-					win.scrollTo( 0, scrollTop === 1 ? 0 : 1 );
-				}	
-			}, 15 );
-		
-		win.addEventListener( "load", function(){
-			setTimeout(function(){
-				//at load, if user hasn't scrolled more than 20 or so...
-				if( getScrollTop() < 20 ){
-					//reset to hide addr bar at onload
-					win.scrollTo( 0, scrollTop === 1 ? 0 : 1 );
-				}
-			}, 0);
-		} );
-	}
-})( this );

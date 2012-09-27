@@ -35,33 +35,14 @@ background-image: linear-gradient(top,#EEE,#DDD);
 	background-color: none;
 }	
 
-#header, #footer {
-	display: block;
-	float: left;
-	width: 600px;
+#header h1{
+	font-size: 2em;
+	/*text-shadow: 0px 1px 0px #000000, 0px -1px 0px #002B5C;*/
 	color: #002B5C;
-	opacity: 1;
-   	background-color: none;
-	font-size: 2.8em;
-	font-weight: bold;
-	padding: 8px 20px 8px 20px;
-	transition-property: background-color;
-	transition-duration: 1s;
-	-moz-transition-property: background-color;
-	-moz-transition-duration: 1s;
-	-webkit-transition-property: background-color;
-	-webkit-transition-duration: 1s;
-}
-
-#header{
-	text-shadow: 0px 1px 0px #000000, 0px -1px 0px #002B5C;
+	overflow:visible;
+	margin: 0;
+	padding-bottom:1%;
 	}
-#header h1{	font-size: 1em;
-
-overflow:visible;
-margin:0px;
-}
-
 #footer {
 	text-align: center;
 	font-size: 1.4em;
@@ -71,7 +52,7 @@ margin:0px;
 
 #footer a {
 	text-decoration: none;
-	color: #006CB0;
+	/*color: #006CB0;*/
 }
 
 #board {
@@ -90,7 +71,7 @@ margin:0px;
 	background-color: #fff;
 	color: #002B5C;
 	text-align: center;
-	width: 120px;
+	width: 18.75%;
 	height: 120px;
 	padding: 3px;
 	border: 1px solid #d1d1d1;
@@ -101,7 +82,12 @@ margin:0px;
 	-webkit-transition-property: background-color;
 	-webkit-transition-duration: 1s;
 }
-
+#sqfree{
+background-image:url('../img/monogram.png');
+background-size:67% 59%;
+background-repeat:no-repeat;
+background-position:center; 
+	}
 .selected {
 	color: #f1f1f1;
 	background-color: #002B5C;
@@ -132,37 +118,78 @@ margin:0px;
    	background-color: #B18D03;
 	opacity: 1;
 }
+#netid{ font-weight:bold;}
 
 @media only screen 
 and (min-device-width : 320px) 
 and (max-device-width : 480px) {
 
 	#container {
-		width: 640;
-		margin: -7px 0px 0px -7px;
+		width: 320px;
+		/*margin: -7px 0px 0px -7px;*/
 	}
+#header h1{
+	font-size: 1.8em;
+	}	
 
-	#header {
-		font-size: 3.6em;
-		text-align: center;
-		padding: 20px 20px 12px 20px;
+#board {
+
+	width: 320px;
+	margin-bottom: 0px;
+}
+.square, .freesquare {
+	width:17.5%;
+	height: 56px;
+}
+
+	.text {
+		line-height: 1em;
+		font-size: 1.8em;
 	}
-#header h1{	font-size: .8em;
-float:left;
+	
+#footer {
+	text-align: left;
+	padding: 5px 0 5px 0;
+	margin-left:-5px;
+	margin-bottom: 10px;
+}
 
-overflow:visible;
-margin:0px;
-}	
-.ui-btn-text{ font-size: 2.3em;}
-	#footer {	
+}
+
+
+@media only screen 
+and (min-device-width : 360px) 
+and (max-device-width : 640px) {
+
+	#container {
+		width: 360px;
+		/*margin: -7px 0px 0px -7px;*/
+	}
+#header h1{
+	font-size: 1.8em;
+	}	
+#board {
+
+	width: 320px;
+}
+.square, .freesquare {
+	width:17.5%;
+	height: 56px;
+}
+
+
+	#footer, #rulesfooter {	
 		padding: 16px 20px 8px 20px;
 		font-size: 2.0em;
 	}
 
 	.text {
-		line-height: 1.2em;
-		font-size: 3em;
+		line-height: 1em;
+		font-size: 1.8em;
 	}
+	
+
+
 }
 
 #rotate-overlay {display: none;}
@@ -172,6 +199,6 @@ margin:0px;
 
  	#rotate-overlay{ background: rgba(0,0,0,0.75);   width: 480px; height: 100%; z-index: 10000000;  position:absolute; top: 0; left: 0; display: block;}
 	.rotate-overlay-modal {   width: 320px; text-align:center;  height: 230px; margin-top: 50%;  padding: 20px; line-height: 1.6em;}
-	.rotate-overlay-modal h3 {margin: 40px; font-size: 3em; color: #FFF;}
+	.rotate-overlay-modal h3 {margin: 40px; font-size: 1.7em; color: #FFF;}
 	.rotate-overlay-modal p {margin-bottom: 17px;}
 }

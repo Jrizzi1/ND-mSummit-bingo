@@ -1,30 +1,142 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-	<title>ND Mobile Summit 2012 - Bingo</title>
+	<title>ND mBingo</title>
 	<meta charset="utf-8">
-	<meta name="viewport" content="user-scalable=no width=device-width">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="viewport" content="user-scalable=yes width=device-width initial-scale=1.0 maximum-scale=1.0">
+	<link rel="apple-touch-icon" sizes="72x72" href="img/home_large.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="img/home_med.png">
+	<link rel="apple-touch-icon" href="img/home_small.png">    
+        
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.css"/>
 	<link href="css/style.css" rel="stylesheet" type="text/css">
 	<script src="js/jquery.js" type="text/javascript"></script>
+	<script type="text/javascript" src="js/bookmark_bubble.js"></script>
+	<script type="text/javascript" src="js/example.js"></script>    
     <script type="text/javascript" src="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.js"></script>  
 	<script src="js/jquery.tappable.js" type="text/javascript"></script>
 	<script src="js/script.js" type="text/javascript"></script>
+    <script>
+/* REALLY awesome, didnt get to use as i fixed orientation issues	
+$(window).bind( 'orientationchange', function(e){
+//    alert(jQuery.event.special.orientationchange.orientation());
+if(jQuery.event.special.orientationchange.orientation() == 'landscape'){
+	$.mobile.changePage($('#winner'), 'pop');
+	}	
+});*/</script>
 
 </head>
 
 <body>
 <section data-role="page">
 	<div id="container">
-		<div id="header" ></div>	
+		
+        <div id="header" data-role="header" data-theme="c"><h1>ND mSummit Bingo</h1></div>	
 		<div id="board"></div>       
-		<div id="footer" ></div>
+		<div id="footer" data-role="footer" data-theme="c" class="ui-bar">
+        	<div data-role="controlgroup" data-type="horizontal">
+        <a href='#user' data-rel="dialog" data-transition="slideup" data-icon="info">User</a>
+        <a href='#about' data-icon="gear" data-transition="slide">About</a>
+        <a href='#rules' data-icon="star" data-transition="slide">Rules</a>
+        <a href='#comm' data-icon="search">Get #'s</a>
+        </div>
+        </div>
 	</div>
-    <div id="rotate-overlay">
-		<div class="rotate-overlay-modal">
-			<h3>You must rotate your device to play ND Bingo</h3>
+
+</section>   
+
+
+        
+<section data-role="page" id="about">
+	<div data-role="header" data-theme="b" ><h1>About this App</h1>
+    <a href="#" data-rel="back"  data-icon="arrow-l">Back</a>
+    </div>	
+	<div data-role="content">
+    <h3>ND Mobile Summit '12 Bingo by <a href="mailto:jrizzi1@nd.edu">Jay Rizzi</a></h3>
+<p>&nbsp;</p>
+<p>I am a Developer here at the University of Notre Dame, and hope you had as much fun playing this app as I had writing it</p>
+<p>I will go into more detail on how I created this, but as the deadline appears, just contact me below and I'll be glad to answer any questions</p>
+
+<a href="mailto:jrizzi1@nd.edu?subject=ND Mobile Summit Bingo App" data-role="button" data-iconpos="left" data-icon="check">Let Me know how you liked it</a>
+<a href="http://twitter.com/jayrizzi1" data-role="button" data-iconpos="left" data-icon="check">My Twitter</a>
+<a href='https://github.com/Jrizzi1/ND-mSummit-bingo' target='_blank' data-role="button" data-iconpos="left" data-icon="gear">Get the source code at Github</a>
+
+
+
+    </div>
+
+	
+ 
+</section> 
+
+
+<section data-role="page" id="rules">
+	<div data-role="header" data-theme="b" ><h1>Rules of Bingo</h1>
+    <a href="#" data-rel="back"  data-icon="arrow-l">Back</a>
+    </div>	
+	<div data-role="content">
+    <ul data-role="listview" data-theme="c">
+		<li>Use your NetID or non-Notre Dame email address to get your BINGO card</li>
+		<li data-theme="d">Throughout the day, we will call the bingo numbers by SMS and Twitter. Follow @NDMobileSummit for the numbers. Numbers will be called during breaks and transitions between speakers.</li>
+	    <li>To win, you must match five numbers (with or without the free space) in a row or diagonal across the board</li>
+		<li data-theme="d">If you have a Bingo, An Alert will appear giving you your choice on how to contact us to verify (twitter, Text-message,  ect.)<!--text 574-344-1987 or tweet @NDMobileSummit with BINGO and the NetID or email address you used to sign up--></li>
+    	<li>Please do not interrupt the conference by shouting out Bingo</li>
+		<li data-theme="d">We will play until all prizes have been awarded. Some prizes may be taxable. Winners must be attendees of the conference and must be present to claim their prizes</li>
+		<li>The game will take place only during the Notre Dame Mobile Summit on September 28, 2012.</li>
+	</ul>
+    </div>
+
+</section> 
+
+<div data-role="dialog" id="winner">
+	
+		<div data-role="header" data-theme="d">
+			<h1>Go IRISH!</h1>
+
 		</div>
-	</div> 
-</section>    
+
+		<div data-role="content" data-theme="c">
+			<h1>Winner!</h1>
+			<p>You've won...but we need to verify so please contact us via:</p>
+			<a id='twitApp' href="twitter://post?message=@NDMobileSummit%20I%20won%20!%20My%20board%20ID%20was%20user" data-role="button"  data-theme="b">Twitter Via App</a>
+            <a href="http://twitter.com/ndmobilesummit" data-role="button"  data-theme="b">Twitter Via Web</a>  
+			<a href="sms://+5743441987" data-role="button"  data-theme="c">Text Message</a>   
+		</div>
+	</div>  
+    
+<div data-role="dialog" id="comm">
+	
+		<div data-role="header" data-theme="d">
+			<h1>Get Numbers</h1>
+
+		</div>
+
+		<div data-role="content" data-theme="c">
+			<h3>Methods to get bingo numbers being played</h3>
+			<p>Pick your poison:</p>
+			<a href="twitter://user?screen_name=ndmobilesummit" data-role="button"  data-theme="b">Twitter Via App</a>
+            <a href="http://twitter.com/ndmobilesummit" data-role="button"  data-theme="b">Twitter Via Web</a>                   
+			<a href="sms://+5743441987" data-role="button"  data-theme="c">Text Message</a>    
+		</div>
+	</div>  
+
+<div data-role="dialog" id="user">
+	
+		<div data-role="header" data-theme="d">
+			<h1>User Account</h1>
+
+		</div>
+
+		<div data-role="content" data-theme="c">
+			
+			<p>Your Board User ID: <span id="netid" style=""></span></p>
+            <p>By selecting to re-enter your credentials, your board numbers will have changed</p>
+			<a href="login.html" data-role="button" data-ajax="false" data-theme="a">Retype my user ID</a>       
+			<a href="#" data-role="button" data-rel="back" data-theme="c">Cancel</a>    
+		</div>
+	</div>  
+ 
 </body>
 </html>
