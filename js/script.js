@@ -11,12 +11,12 @@ localStorage.setItem("customSeed", CUSTOM_SEED);
 
 //array of numbers for each of the 5 columns
 var usedNums = new Array(76);
-
+// Twitter vars
+var twitFetch = "http://search.twitter.com/search.json?q=from%3Andmobilesummit",
+twitterAppUri = "twitter://post?message=@NDMobileSummit%20I%20won%20!%20My%20board%20ID%20was%20"+netid;
 $(document).ready(function() {	
 //debugger: localStorage.clear();
 
-//Display variable settings
-var twitterAppUri = "twitter://post?message=@NDMobileSummit%20I%20won%20!%20My%20board%20ID%20was%20"+netid;
 
 	$('body').on('touchmove', true);
 	$('#netid').append(netid);
@@ -25,6 +25,7 @@ var twitterAppUri = "twitter://post?message=@NDMobileSummit%20I%20won%20!%20My%2
 
 //Generate Bingo Card
 	newCard();
+	readTwatter();
 	
 	$('div.square').tappable(function () {
 		var squareStorageKey = $(this).attr('id');
@@ -165,4 +166,29 @@ function getParameterByName(name)
     return "";
   else
     return decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+function readTwatter(){
+    $.ajax({
+        url: twitFetch,
+        dataType: 'jsonp',
+        success: function(json_results){			
+			//console.log(json_results);
+			
+            // Need to add UL on AJAX call or formatting of userlist is not displayed
+            $('#twitList').append('<ul data-role="listview"></ul>');
+            listItems = $('#twitList').find('ul');
+            $.each(json_results.results, function(key) {
+                html = '<a href="http://twitter.com/ndmobilesummit" target="_blank"><img src="'+json_results.results[key].profile_image_url+'">';
+                // STATIC VERSION html += '<h3>'+json_results.results[key].text+'</h3>';
+				// LINK VERSION 
+				html += '<h3>'+json_results.results[key].text+'</h3>';
+                //html += '<p>From: '+json_results.results[key].from_user+' Created: '+json_results.results[key].created_at+'</p></a>';
+				html += '<p>Tweeted: '+json_results.results[key].created_at+'</p></a>';
+                listItems.append('<li>'+html+'</li>');
+            });
+            // Need to refresh list after AJAX call
+            $('#twitList ul').listview('refresh');
+        }
+    });
 }
