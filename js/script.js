@@ -25,7 +25,9 @@ $(document).ready(function() {
 
 //Generate Bingo Card
 	newCard();
-	readTwatter();
+//Append Tweets from the conference to the #twitter app page	
+	readTwitter();
+	
 	
 	$('div.square').tappable(function () {
 		var squareStorageKey = $(this).attr('id');
@@ -168,7 +170,7 @@ function getParameterByName(name)
     return decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
-function readTwatter(){
+function readTwitter(){
     $.ajax({
         url: twitFetch,
         dataType: 'jsonp',
