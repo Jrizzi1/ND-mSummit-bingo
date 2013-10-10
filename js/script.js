@@ -12,22 +12,68 @@ localStorage.setItem("customSeed", CUSTOM_SEED);
 //array of numbers for each of the 5 columns
 var usedNums = new Array(76);
 // Twitter vars
-var twitFetch = "http://search.twitter.com/search.json?q=from%3Andmobilesummit",
-twitterAppUri = "twitter://post?message=@NDMobileSummit%20I%20won%20!%20My%20board%20ID%20was%20"+netid;
+twitterAppUriWinnerMsgPrefill = "twitter://post?message=@NDMobileSummit%20I%20won%20!%20My%20board%20ID%20was%20"+netid+" %23mobileND %23bingo";
+twitterSiteWinnerMsgPrefill = "http://twitter.com/home?status=@NDMobileSummit%20I%20won%20!%20My%20board%20ID%20was%20"+netid+" %23mobileND %23bingo";
+//var smsWinnerMsgPrefill = browserDetectionForSMSPrefill(netid);	
+//var smsWinnerLink, smsFollowTwitterLink;
+/*var browser = browserDetection();
+if (browser =='IOS'){
+	smsWinnerLink='sms:+5743441986;body=I Won ND mobile Bingo! my ID was '+netid;
+	smsFollowTwitterLink='sms:+40404;body=FOLLOW ndmobilesummit';	
+	} else if (browser =='Android'){
+	smsWinnerLink='sms:+5743441987?body=I Won ND mobile Bingo! my ID was '+netid;
+	smsFollowTwitterLink='sms:+40404?body=FOLLOW ndmobilesummit';
+	} else {
+	smsWinnerLink='sms://+5743441988';
+	smsFollowTwitterLink='sms://+40404';
+	}*/
+//defaults	
+var smsWinnerLink='sms://+5743441987';
+var smsFollowTwitterLink='sms://+40404';	
+//Add Modernizr tests
+Modernizr.addTest('ios', function () {
+  return !!navigator.userAgent.match(/iPhone|iPad|iPod/i);
+});
+Modernizr.addTest('android', function () {
+  return !!navigator.userAgent.match(/Android/i);
+});
+//usage
+if (Modernizr.ios) {
+    //do stuff specific for iOS	
+	smsWinnerLink='sms:+5743441987;body=I Won ND mobile Bingo! my ID was '+netid;
+	smsFollowTwitterLink='sms:+40404;body=FOLLOW ndmobilesummit';	
+};
+
+if (Modernizr.android) {
+    //do stuff specific for android	
+	smsWinnerLink='sms:+5743441987?body=I Won ND mobile Bingo! my ID was '+netid;
+	smsFollowTwitterLink='sms:+40404?body=FOLLOW ndmobilesummit';
+};
+
+
 $(document).ready(function() {	
 //debugger: localStorage.clear();
 
-
+$('.smsrulelink').attr('href',smsFollowTwitterLink); 
 	$('body').on('touchmove', true);
-	$('#netid').append(netid);
-	$('#twitApp').attr('href', twitterAppUri);	
 
+	$('#netid').append(netid);
+	//$('#twitApp').attr('href', twitterAppUri);	
+
+$('#nav ul li').on('click', function(){
+	
+	$this = $(this);
+	$this.toggleClass('is-active').siblings().removeClass('is-active');
+	});
+	
+	
+$('.open-popup-link').magnificPopup({
+  type:'inline',
+  midClick: true // Allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source in href.
+});	
 
 //Generate Bingo Card
 	newCard();
-//Append Tweets from the conference to the #twitter app page	
-	readTwitter();
-	
 	
 	$('div.square').tappable(function () {
 		var squareStorageKey = $(this).attr('id');
@@ -62,20 +108,21 @@ $(document).ready(function() {
 
 		var diag1 = ($('#sq0').data('value')+$('#sq6').data('value')+$('#sqfree').data('value')+$('#sq17').data('value')+$('#sq23').data('value'));	
 		var diag2 = ($('#sq4').data('value')+$('#sq8').data('value')+$('#sqfree').data('value')+$('#sq15').data('value')+$('#sq19').data('value'));	
-		
+
 		if (row1 == 5 || row2 == 5 || row3 == 5 || row4 == 5 || row5 == 5 || col1 == 5 || col2 == 5 || col3 == 5  || col4 == 5  || col5 == 5 || diag1 == 5 || diag2 == 5) {
-			/*$('#header').html(winText);
-			$('#header').addClass("win");
-			$('#header').attr('data-theme','b').removeClass('ui-bar-c').addClass('ui-bar-b');*/
-			$.mobile.changePage($('#winner'), 'pop');	
-	
+			//alert('Winner, need a better message here that opens the tweet to send all that jazz');
+// Open directly via API
+
+$.magnificPopup.open({
+  items: {
+    src: '<div class="white-popup"><h1>Winner!</h1><ul><li><a href="'+twitterAppUriWinnerMsgPrefill+'">Tweet now to reap your rewards</a></li><li> Twitter App not installed on this device? <a target="_blank" href="'+twitterSiteWinnerMsgPrefill+'">Click Here</a></li><li><a href="'+smsWinnerLink+'">I prefer Text Message to +(574)344-1987</a></li></div>', // can be a HTML string, jQuery object, or CSS selector
+  type: 'inline'
+  }, 
+  closeOnContentClick: false, closeOnBgClick: false
+});
 //Removed because chas Grundy thought it was annoying...winSnd.play();
     		
-    	} else {
-/*			$('#header').html(headerText);
-			$('#header').removeClass("win");
-			$('#header').attr('data-theme','c').removeClass('ui-bar-b').addClass('ui-bar-c')*/
-		}; 
+    	};
     });
         
 });
@@ -87,7 +134,7 @@ function newCard() {
   for(var i=0 ; i<24 ; i++){
 		if (i==12) {
 //if 13, append the freesquare then move along			
-			$('#board').append("<div data-value='1' class='selected freesquare' id='sqfree'></div>");
+			$('#board').append("<div data-value='1' class='selected freesquare' id='sqfree'><div id='freesq' class='text'>&nbsp;</div></div>");
 			setSquare(i);
 		} else {
 
@@ -170,27 +217,16 @@ function getParameterByName(name)
     return decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
-function readTwitter(){
-    $.ajax({
-        url: twitFetch,
-        dataType: 'jsonp',
-        success: function(json_results){			
-			//console.log(json_results);
-			
-            // Need to add UL on AJAX call or formatting of userlist is not displayed
-            $('#twitList').append('<ul data-role="listview"></ul>');
-            listItems = $('#twitList').find('ul');
-            $.each(json_results.results, function(key) {
-                html = '<a href="http://twitter.com/ndmobilesummit" target="_blank"><img src="'+json_results.results[key].profile_image_url+'">';
-                // STATIC VERSION html += '<h3>'+json_results.results[key].text+'</h3>';
-				// LINK VERSION 
-				html += '<h3>'+json_results.results[key].text+'</h3>';
-                //html += '<p>From: '+json_results.results[key].from_user+' Created: '+json_results.results[key].created_at+'</p></a>';
-				html += '<p>Tweeted: '+json_results.results[key].created_at+'</p></a>';
-                listItems.append('<li>'+html+'</li>');
-            });
-            // Need to refresh list after AJAX call
-            $('#twitList ul').listview('refresh');
-        }
-    });
-}
+
+function browserDetection(){
+	//deprecating for useage of modernizr tests
+var result ="";	
+	if( /iPhone|iPad|iPod/i.test(navigator.userAgent) ) {
+	result = 'IOS';
+
+	} else if ( /Android/i.test(navigator.userAgent) ){
+	result = 'Android';
+	} 
+		
+	return result;	
+	}

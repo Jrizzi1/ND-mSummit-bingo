@@ -1,155 +1,310 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html class="no-js">
 <head>
-	<title>ND mBingo</title>
-	<meta charset="utf-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
-	<meta name="apple-mobile-web-app-status-bar-style" content="black">
-	<meta name="viewport" content="user-scalable=yes width=device-width initial-scale=1.0 maximum-scale=1.0">
-	<link rel="apple-touch-icon" sizes="72x72" href="img/home_large.png">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    	<link rel="apple-touch-icon" sizes="72x72" href="img/home_large.png">
 	<link rel="apple-touch-icon" sizes="114x114" href="img/home_med.png">
 	<link rel="apple-touch-icon" href="img/home_small.png">    
-        
-    <link rel="stylesheet" href="themes/nd-custom-theme.min.css" />
-	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile.structure-1.1.1.min.css" />
 	<link href="css/style.css" rel="stylesheet" type="text/css">
-	<script src="js/jquery.js" type="text/javascript"></script>
-	<script type="text/javascript" src="js/bookmark_bubble.js"></script>
-	<script type="text/javascript" src="js/example.js"></script>    
-    <script type="text/javascript" src="js/jquery.mobile-1.1.1.min.js"></script>
+    <link rel="stylesheet" href="css/magnific-popup.css"> 
+	<title>Mobile Bingo</title>
+	<script src="js/modernizr.js" type="text/javascript"></script>    
+	<script src="js/jquery-1.9.1.js" type="text/javascript"></script>    
 	<script src="js/jquery.tappable.js" type="text/javascript"></script>
-	<script src="js/script.js" type="text/javascript"></script>
+    <script src="js/jquery.magnific-popup.js" type="text/javascript"></script>  
+	<script src="js/script.js" type="text/javascript"></script>   
 
-    <script>
-/* REALLY awesome, didnt get to use as i fixed orientation issues	
-$(window).bind( 'orientationchange', function(e){
-//    alert(jQuery.event.special.orientationchange.orientation());
-if(jQuery.event.special.orientationchange.orientation() == 'landscape'){
-	$.mobile.changePage($('#winner'), 'pop');
-	}	
-});*/</script>
+ 	<link href="css/rwd.css" rel="stylesheet" type="text/css">   
 
+    <!--[if (gt IE 8) | (IEMobile)]><!-->
+    <link rel="stylesheet" href="css/rwd.css">
+    <!--<![endif]-->
+    <!--[if (lt IE 9) & (!IEMobile)]>
+    <link rel="stylesheet" href="css/ie.css">
+    <![endif]-->
+    
 </head>
-
 <body>
-<section data-role="page">
-	<div id="container">
+
+<div id="outer-wrap">
+<div id="inner-wrap">
+
+    <header id="top" role="banner">
+    
+<!--<div class="block" style="
+    text-align: center;
+">
+            <img src="img/header.png" >
+            <a class="nav-btn" id="nav-open-btn" href="#nav">Menu Navigation</a>
+        </div>    -->
+        <div class="block">
+            <h1 class="block-title">ND Mobile Summit Bingo</h1>
+            <a class="nav-btn" id="nav-open-btn" href="#nav">Menu Navigation</a>
+        </div>
+    </header>
+
+    <nav id="nav" role="navigation">
+        <div class="block">
+            <h2 class="block-title">Menu</h2>
+            
+            <ul>
+				<!--<li class="is-active">
+                    <a href="#board">Bingo Board</a>
+                </li>            
+                <!--<li>
+                    <a href="#rules">Rules</a>
+                </li>
+                
+             <!--
+                
+             --><li class="is-active">
+                    <a href="#numbers" class="open-popup-link">Get Bingo Numbers</a>
+                </li><!--
+             --><li>
+                    <a target="_blank" class="nd icon" href="http://mobile.nd.edu/summits/fall-2013/schedule/">Summit Schedule</a>
+                </li><!--
+             --><li>
+                    <a target="_blank" class="twitter icon" href="https://twitter.com/NDMobileSummit">Summit Twitter</a>
+                </li><!--   
+             --><li>
+                    <a target="_blank" class="github icon"href="http://github.com/Jrizzi1/ND-mSummit-bingo">About / Source</a>
+                </li>              
+            </ul>
+            <a class="close-btn" id="nav-close-btn" href="#top">Return to Content</a>
+        </div>
+    </nav>
+        <section id="container">
+    <div id="main" role="main" class="main block">
+
 		
-        <div id="header" data-role="header" data-theme="c"><h1>ND mSummit Bingo</h1></div>	
-		<div id="board"></div>       
-		<div id="footer" data-role="footer" data-theme="c" class="ui-bar">
-        	<div data-role="controlgroup" data-type="horizontal">
-        <a href='#user' data-rel="dialog" data-transition="slideup" data-icon="info">User</a>
-        <a href='#about' data-icon="gear" data-transition="slide">About</a>
-        <a href='#rules' data-icon="star" data-transition="slide">Rules</a>
-        <a href='#methods' data-icon="search" data-transition="slide">Get #'s</a>
-        </div>
-        </div>
-	</div>
 
-</section>   
+		<div id="board"></div>
+		<section id="rules" class="page" style="visibility:visible;">  
+        <article class="block prose">
+        <h1>Rules</h1>           
 
-
+    	<ul data-role="listview">
+			<li>Use your NetID or non-Notre Dame email address to get your BINGO card</li>
+			<li>Throughout the day, we will Tweet the BINGO numbers. <a href="https://twitter.com/NDMobileSummit" class="twitter-follow-button" data-show-count="false" data-size="large" data-dnt="true">Follow @NDMobileSummit</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script> for the numbers or <a class="smsrulelink" href="sms://+40404">text "FOLLOW ndmobilesummit" to 40404</a> to receive Twitter alerts by SMS. Numbers will be called during breaks and transitions between speakers.</li>
+	    	<li>To win, you must match five numbers (with or without the free space) in a row or diagonal across the board</li>
+			<li>If you have a B-I-N-G-O, a popup will appear giving you your choice on how to contact us to verify. In case this popup does not appear,  <a href="https://twitter.com/NDMobileSummit">tweet @NDMobileSummit</a> or send a  <a href="sms://+5743441987"> text message to (574) 344-1987</a> with BINGO and the Email / user ID you used to generate your bingo card with.</li>
+    		<li>Please do not interrupt the conference by shouting out BINGO!</li>
+			<li>We will play until all prizes have been awarded. Some prizes may be taxable. Winners must be attendees of the conference and must be present to claim their prizes</li>
+			<li>The game will take place only during the Notre Dame Mobile Summit on October 11, 2013.</li>
+		</ul> 
         
-<section data-role="page" id="about">
-	<div data-role="header" data-theme="i" ><h1>About this App</h1>
-    <a href="#" data-rel="back"  data-icon="arrow-l" data-theme="i">Back</a>
-    </div>	
-	<div data-role="content">
-    <h3>ND Mobile Summit '12 Bingo by <a href="mailto:jrizzi1@nd.edu">Jay Rizzi</a></h3>
-<p>&nbsp;</p>
-<p>I am a Developer here at the University of Notre Dame, and hope you had as much fun playing this app as I had writing it</p>
-<p>I will go into more detail on how I created this for my lightning talk</p>
-
-<a href="mailto:jrizzi1@nd.edu?subject=ND Mobile Summit Bingo App" data-role="button" data-iconpos="left" data-icon="check">Let me know how you liked it</a>
-<a href="http://twitter.com/jayrizzi1" data-role="button" data-iconpos="left" data-icon="check">@jayrizzi1 Twitter</a>
-<a href='https://github.com/Jrizzi1/ND-mSummit-bingo' target='_blank' data-role="button" data-iconpos="left" data-icon="gear">Get the source code at Github</a>
-    </div>
-</section> 
-
-<section data-role="page" id="twitter" >
-
-  <div data-role="header" data-theme="i"> 
-    <h1>@NDmobileSummit</h1>
-    <a href="#" data-rel="back"  data-icon="arrow-l" data-theme="i">Back</a></div>
-	<div data-role="content"> 
-		<div id="twitList"></div>	
-	</div><!-- /content -->  
-</section>
-<style>
-.ui-li-heading{ margin-left: -2em;}
-.ui-li-heading {
-
-overflow: visible;
-white-space:normal;
-}
-</style>
-<section data-role="page" id="methods">
-	<div data-role="header" data-theme="i" ><h1>Get the Numbers</h1>
-    <a href="#" data-rel="back"  data-icon="arrow-l" data-theme="i">Back</a>
-    </div>	
-	<div data-role="content">
-    <h4>Choose a way to get your Bingo #'s</h4>
-    <a href="#twitter" data-role="button"  data-theme="b">Twitter feed in Bingo App</a>
-    <a href="twitter://user?screen_name=ndmobilesummit" data-role="button"  data-theme="b">Twitter Native</a>
-    <a href="http://twitter.com/ndmobilesummit" data-rel="external" data-role="button"  data-theme="b">Twitter Browser</a>			
-    <a href="http://goo.gl/POiTG" data-rel="external" target='_blank' data-role="button"  data-theme="g">Text Messaging Registration</a>
-<h4>so you can plan your day around Bingo:</h4>    
-     <a href="http://mobile.nd.edu/events/2012/09/28/12382-notre-dame-mobile-summit/" data-rel="external" target='_blank' data-role="button"  data-theme="h">Mobile Summit Schedule</a>
-    </div>
-
-</section> 
-
-<section data-role="page" id="rules">
-	<div data-role="header" data-theme="i" ><h1>Rules of Bingo</h1>
-    <a href="#" data-rel="back"  data-icon="arrow-l" data-theme="i">Back</a>
-    </div>	
-	<div data-role="content">
-
-    <ul data-role="listview" data-theme="c">
-		<li>Use your NetID or non-Notre Dame email address to get your BINGO card</li>
-		<li data-theme="d">Throughout the day, we will call the bingo numbers by SMS and Twitter. Follow @NDMobileSummit for the numbers. Numbers will be called during breaks and transitions between speakers.</li>
-	    <li>To win, you must match five numbers (with or without the free space) in a row or diagonal across the board</li>
-		<li data-theme="d">If you have a Bingo, An Alert will appear giving you your choice on how to contact us to verify (twitter, Text-message,  ect.)<!--text 574-344-1987 or tweet @NDMobileSummit with BINGO and the NetID or email address you used to sign up--></li>
-    	<li>Please do not interrupt the conference by shouting out Bingo</li>
-		<li data-theme="d">We will play until all prizes have been awarded. Some prizes may be taxable. Winners must be attendees of the conference and must be present to claim their prizes</li>
-		<li>The game will take place only during the Notre Dame Mobile Summit on September 28, 2012.</li>
-	</ul>
-    </div>
-
-</section> 
-
-<div data-role="dialog" id="winner">
-	
-		<div data-role="header" data-theme="f">
-			<h1>Go IRISH!</h1>
-
+        
+        <p><a href="#top">Return to BIngo Board</a></p>                 
+    	</article> 
+		</section>
+       
+<!--		<section id="about" class="page" style="visibility:visible;">
+        <article class="block prose">
+        <h1>About</h1>
+        <p><a href="#top">Return to Board</a></p>
+        <p>Hello, I'm <a href="mailto:jrizzi1@nd.edu">Jay Rizzi</a> email twitter, Developer here at the University of Notre Dame, and hope you had as much fun playing this app as I had writing it</p>
+        <p> I rewrote many parts of this app from <a href="">last year's version</a>, going away from jQuery Mobile and using CSS3 tranisitions / RWD  instead</p>
+		<p>feel free to <a href='http://github.com/Jrizzi1/ND-mSummit-bingo' target='_blank' data-role="button" data-iconpos="left" data-icon="gear">Get the source code at Github</a></p>
+        </article>
+		</section>-->
+<!---                   
+		<div id="twatter" style="visibility:hidden;">
+        <div class="responsive-iframe-container">
+        <a class="twitter-timeline" href="https://twitter.com/jayrizzi1" data-widget-id="382205871624691712">Tweets by @jayrizzi1</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 		</div>
+        </div> 
+        --->
+        
+</section>   
+<footer role="contentinfo">
+        <div class="block prose">
+            <p class="small">
+            <a id="ndmark" href="/" style="width: 200px;"><img src="https://www.nd.edu/assets/images/marks/blue/ndmark400.png" class="ndmark" alt="University of Notre Dame" style="display: block;  width: 200px;  max-width: 100%;  text-decoration: none;"></a>
+            </p>
+            <p class="small">Written by <a href="http://bit.ly/jrizzi1">Jay Rizzi</a></p>
+        </div>
+    </footer>
 
-		<div data-role="content" data-theme="c">
-			<h1>Winner!</h1>
-			<p>You've won...but we need to verify so please contact us via:</p>
-			<a id='twitApp' href="twitter://post?message=@NDMobileSummit%20I%20won%20!%20My%20board%20ID%20was%20user" data-role="button"  data-theme="b">Twitter Via App</a>
-            <a href="http://twitter.com/ndmobilesummit" data-role="button"  data-theme="b">Twitter Via Web</a>  
-			<a href="sms://+5743441987" data-role="button"  data-theme="g">Text Message</a>   
-		</div>
-	</div>  
+</div>
+<!--/#inner-wrap-->
+</div>
+<!--/#outer-wrap-->
+<div id="numbers" class="white-popup mfp-hide">
+<h4 style="margin-bottom: 3%;">Want BINGO Numbers? Choose!</h4>
 
-<div data-role="dialog" id="user">
-	
-		<div data-role="header" data-theme="e">
-			<h1>User Account</h1>
+<ul>
+<li><a href="https://twitter.com/NDMobileSummit" class="twitter-follow-button" data-show-count="false" data-size="large" data-dnt="true">Follow @NDMobileSummit</a></li>
+<li><a class="smsrulelink" href="sms://+40404">Text msg "FOLLOW ndmobilesummit" to 40404</a></li>
+</ul>
+</div>
 
-		</div>
+<!-- Popup itself -->
 
-		<div data-role="content" data-theme="e">
-			
-			<p>Your Board User ID: <span id="netid" style=""></span></p>
-            <p>By selecting to re-enter your credentials, your board numbers will have changed</p>
-			<a href="login.html" data-role="button" data-ajax="false" data-theme="a">Retype my user ID</a>       
-			<a href="#" data-role="button" data-rel="back" data-theme="c">Cancel</a>    
-		</div>
-	</div>  
- 
+
+<script>
+/*!
+ *
+ *  Copyright (c) David Bushell | http://dbushell.com/
+ *
+ */
+(function(window, document, undefined)
+{
+
+    // helper functions
+
+    var trim = function(str)
+    {
+        return str.trim ? str.trim() : str.replace(/^\s+|\s+$/g,'');
+    };
+
+    var hasClass = function(el, cn)
+    {
+        return (' ' + el.className + ' ').indexOf(' ' + cn + ' ') !== -1;
+    };
+
+    var addClass = function(el, cn)
+    {
+        if (!hasClass(el, cn)) {
+            el.className = (el.className === '') ? cn : el.className + ' ' + cn;
+        }
+    };
+
+    var removeClass = function(el, cn)
+    {
+        el.className = trim((' ' + el.className + ' ').replace(' ' + cn + ' ', ' '));
+    };
+
+    var hasParent = function(el, id)
+    {
+        if (el) {
+            do {
+                if (el.id === id) {
+                    return true;
+                }
+                if (el.nodeType === 9) {
+                    break;
+                }
+            }
+            while((el = el.parentNode));
+        }
+        return false;
+    };
+
+    // normalize vendor prefixes
+
+    var doc = document.documentElement;
+
+    var transform_prop = window.Modernizr.prefixed('transform'),
+        transition_prop = window.Modernizr.prefixed('transition'),
+        transition_end = (function() {
+            var props = {
+                'WebkitTransition' : 'webkitTransitionEnd',
+                'MozTransition'    : 'transitionend',
+                'OTransition'      : 'oTransitionEnd otransitionend',
+                'msTransition'     : 'MSTransitionEnd',
+                'transition'       : 'transitionend'
+            };
+            return props.hasOwnProperty(transition_prop) ? props[transition_prop] : false;
+        })();
+
+    window.App = (function()
+    {
+
+        var _init = false, app = { };
+
+        var inner = document.getElementById('inner-wrap'),
+
+            nav_open = false,
+
+            nav_class = 'js-nav';
+
+
+        app.init = function()
+        {
+            if (_init) {
+                return;
+            }
+            _init = true;
+
+            var closeNavEnd = function(e)
+            {
+                if (e && e.target === inner) {
+                    document.removeEventListener(transition_end, closeNavEnd, false);
+                }
+                nav_open = false;
+            };
+
+            app.closeNav =function()
+            {
+                if (nav_open) {
+                    // close navigation after transition or immediately
+                    var duration = (transition_end && transition_prop) ? parseFloat(window.getComputedStyle(inner, '')[transition_prop + 'Duration']) : 0;
+                    if (duration > 0) {
+                        document.addEventListener(transition_end, closeNavEnd, false);
+                    } else {
+                        closeNavEnd(null);
+                    }
+                }
+                removeClass(doc, nav_class);
+            };
+
+            app.openNav = function()
+            {
+                if (nav_open) {
+                    return;
+                }
+                addClass(doc, nav_class);
+                nav_open = true;
+            };
+
+            app.toggleNav = function(e)
+            {
+                if (nav_open && hasClass(doc, nav_class)) {
+                    app.closeNav();
+                } else {
+                    app.openNav();
+                }
+                if (e) {
+                    e.preventDefault();
+                }
+            };
+
+            // open nav with main "nav" button
+            document.getElementById('nav-open-btn').addEventListener('click', app.toggleNav, false);
+
+            // close nav with main "close" button
+            document.getElementById('nav-close-btn').addEventListener('click', app.toggleNav, false);
+
+            // close nav by touching the partial off-screen content
+            document.addEventListener('click', function(e)
+            {
+                if (nav_open && !hasParent(e.target, 'nav')) {
+                    e.preventDefault();
+                    app.closeNav();
+                }
+            },
+            true);
+
+            addClass(doc, 'js-ready');
+
+        };
+
+        return app;
+
+    })();
+
+    if (window.addEventListener) {
+        window.addEventListener('DOMContentLoaded', window.App.init, false);
+    }
+
+})(window, window.document);
+</script>
+
 </body>
 </html>
