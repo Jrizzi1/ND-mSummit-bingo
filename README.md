@@ -11,6 +11,10 @@ Iimplemented was Modernizer User agent tests to attempt to prepopulate a message
 ####Twitter
 Due to the 1.1 API change , i also removed some Twitter integrations. I wanted the app to stay entirely HTML5/js and avoid server-side scripting. Seems much easier to  users directly to Twitter rather than posting by proxy and custom code.
 
+Thanks again for playing!
+
+- Jay Rizzi
+
 ## end of 2013 Update notes
 
 
