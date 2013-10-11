@@ -1,7 +1,8 @@
 ## Notre Dame Mobile Summit Bingo - 2013 update
 Hi, thanks for playing ND Mobile Summit Bingo! this years release was a massive overhaul from last years version.
 ####Design
-The Main focus on making the entire game as a Responsive Website, utilizing EM based media queries ( for good reading see  [The EMs have it: Proportional Media Queries FTW!](http://blog.cloudfour.com/the-ems-have-it-proportional-media-queries-ftw/ "Title")
+The Main focus on making the entire game as a Responsive Website, utilizing EM based media queries ( for good reading see  [The EMs have it: Proportional Media Queries FTW!](http://blog.cloudfour.com/the-ems-have-it-proportional-media-queries-ftw/ "Title") )
+
 P.S. it is very difficult to maintain a square grid responsively , I about broke down in tears.
 
 The other major improvement is implementing  an Off-Canvas menu, transitioned by CSS 3D transforms, which are applied by [Modernizr](http://modernizr.com, "Title") classes. 
